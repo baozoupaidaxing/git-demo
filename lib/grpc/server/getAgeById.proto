@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package server;
+
+service server{
+    rpc GetAgeById(sIdReq) returns (ageRes) {}
+}
+
+message sIdReq{
+    int64 sId = 1;
+}
+
+message ageRes{
+    int64 sAge = 1;
+}
+
+//protoc -I . --go_out=plugins=grpc:. ./hello.proto

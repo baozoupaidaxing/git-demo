@@ -1,0 +1,51 @@
+listen = ":9030"
+grpc_listen = ":9637"
+
+# 关键字过滤
+trie_file_path = "/data/illegalWord/illegalwords.txt"
+
+[metric]
+    influxdb_name = "clubapisrv_metric"
+    influxdb_host = "http://10.10.50.13:8086"
+    influxdb_username = ""
+    influxdb_password = ""
+    influxdb_tags = []
+
+
+[dbservers]
+  [dbservers.test_db]
+    host = "localhost"
+    port = 5432
+    dbname = "test_db"
+    user = "test"
+    password = "123456"
+
+
+
+# Redis数据库配置
+[redisservers]
+    # token口令数据库
+    [redisservers.db0]
+    addr = "10.10.50.13:6379"
+    db = 0
+
+
+
+  # grpc连接ip
+  # 权重轮询需要配置weight数组数量要一致
+[grpc]
+  [grpc.propscommon]
+    addrs = ["127.0.0.1:9601"]
+    weight = [2,2,2]
+    [grpc.clubMgr]
+    addrs = ["10.10.50.9:9641"]
+    weight = [2]
+    [grpc.notice]
+    addrs = ["10.10.50.9:9615"]
+    weight = [2]
+    [grpc.clubMember]
+    addrs = ["127.0.0.1:9636"]
+    weight = [2]
+    [grpc.userCenter]
+    addrs = ["127.0.0.1:9635"]
+    weight = [2]
